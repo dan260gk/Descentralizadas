@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web3 Project</title>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Web3 Project</h1>
+    <div>
+        <h2>Users</h2>
+        <form id="addUserForm">
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Add User</button>
+        </form>
+        <div id="users"></div>
+    </div>
+
+    <div>
+        <h2>Recipes</h2>
+        <form id="addRecipeForm">
+            <input type="text" id="recipeName" placeholder="Recipe Name" required>
+            <textarea id="description" placeholder="Description" required></textarea>
+            <textarea id="ingredients" placeholder="Ingredients" required></textarea>
+            <textarea id="steps" placeholder="Steps" required></textarea>
+            <input type="number" id="authorId" placeholder="Author ID" required>
+            <button type="submit">Add Recipe</button>
+        </form>
+        <div id="recipes"></div>
+    </div>
+
+    <div>
+        <h2>Ratings</h2>
+        <form id="addRatingForm">
+            <input type="number" id="score" placeholder="Score" min="0" max="5" required>
+            <input type="number" id="recipeId" placeholder="Recipe ID" required>
+            <input type="number" id="userId" placeholder="User ID" required>
+            <button type="submit">Add Rating</button>
+        </form>
+        <div id="ratings"></div>
+    </div>
+</body>
+</html>

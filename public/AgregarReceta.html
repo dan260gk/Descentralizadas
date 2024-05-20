@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Only Flans - Agregar Receta</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #e67e22;
+            padding: 10px;
+            text-align: center;
+            color: #fff;
+        }
+
+        #logo {
+            margin: 0 auto;
+            background: rgba(255, 165, 0, 0.8);
+            padding: 10px;
+        }
+
+        #logo img {
+            max-width: 20%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        #recipe-form {
+            width: 60%; /* Ajusta el ancho según tus preferencias */
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #recipe-form input,
+        #recipe-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #e67e22;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            max-width: 200px; 
+            margin: 1 auto; 
+        }
+        #recipe-button {
+            background-color: #e67e22;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="logo">
+            <img src="static/FlanChan2.png" alt="Only Flans Logo" height="150">
+        </div>
+        <div id="login">
+            <button onclick="window.location.href='/UsuarioHome.html'">Volver</button>
+        </div>
+    </header>
+
+    <div id="recipe-form">
+        <h1>Agregar Receta ...</h1>
+        <form id="recipe-add-form">
+            <input type="text" id="titulo" placeholder="Título" required>
+            <textarea id="descripcion" placeholder="Descripción" required></textarea>
+            <textarea id="ingredientes" placeholder="Ingredientes" required></textarea>
+            <textarea id="instrucciones" placeholder="Instrucciones" required></textarea>
+            <button type="submit" id="agregar">Agregar Receta</button>
+        </form>
+    </div>
+
+    <script>
+    document.getElementById('recipe-add-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const button = document.getElementById('agregar');
+        button.innerHTML = '<img src="static/loading.gif" alt="Cargando..." width="15" height="15">';
+        const name = document.getElementById('titulo').value;
+        const description = document.getElementById('descripcion').value;
+        const ingredients = document.getElementById('ingredientes').value;
+        const steps = document.getElementById('instrucciones').value;
+        const authorId = localStorage.getItem('uid');
+
+        const response = await fetch('/api/recipe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, description, ingredients, steps, authorId })
+        });
+        const result = await response.json();
+        alert(JSON.stringify(result, null, 2));
+        window.location.href = '/UsuarioHome.html';
+});
+
+    </script>
+</body>
+
+
+</html>
